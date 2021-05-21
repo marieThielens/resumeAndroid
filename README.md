@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.btn_Cancel_connect:
             Toast.makeText(getApplicationContext(), "Au revoir", Toast.LENGTH_LONG).show();
+            break;
         }
     }
 }
