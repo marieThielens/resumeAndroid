@@ -114,5 +114,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 - Les utiliser dans notre layout
 `android:textColor=@color/jaune`
 
+## Envoyer du texte
+
+```java
+public class MainActivity extends AppCompatActivity{
+
+    private TextView text = null;
+    
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        text = new TextView(this);
+        text.setText(R.string.app_name);
+        setContentView(text);
+    }
+```
+
 - La suite :µ
  creer notre propre style / intents / Passer un coup de fil / Liste et recycler view

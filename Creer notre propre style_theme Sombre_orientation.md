@@ -1,4 +1,4 @@
-# Créer un style propre, un thème sombre
+# Créer un style propre, un thème sombre et jouer sur l'orientation du telephone
 
 ## Référencez toutes les couleurs dans colors.xml
 
@@ -94,3 +94,20 @@ clique droit sur value/ new value file / nom : styleSombre . Availible qualifers
     </style>
 </resources>
 ```
+
+## Orientation / mode vertical
+
+- Dans activity_main.xml, Split le code. Clique droit sur le 2 eme onglet (un telephone qui troune) et choisir) *Create Landscape Variation*
+- Le dossier *activity_main* est apparu dans le dossier Layout
+    - deux dossier. Celui qui à (land) est celui pour l'orientation paysage
+- Je vais mettre mon titre au centre quand on est en mode paysage
+
+ ```xml
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Mon titre"
+    style="@style/titreDemo"
+    android:gravity="center"
+    />
+ ```
