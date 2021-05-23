@@ -47,8 +47,20 @@
 
 ### Le fichier MainActivity
 
-- Ecouter mes boutons et lancer l'activitée ou aler sur un site externe
-    - **setData()** 
+- Ecouter mes boutons et lancer l'activitée ou aller sur un site externe
+    - **setData()** : envoyer les données à l'intent
+    - **Uri** : Uri est une chaine de caractère qui permet d'identifier un endroit
+    - **Uri.parse()** : crée un nouvel Uri objet à partir d'un string
+
+    - **ACTION_VIEW** : si on veut voir quelque chose. Permet de visionner une donnée. Quand on lance un ACTION_VIEW avec une adresse internet, c'est le navigateur qui se lance, et quand on lance un ACTION_VIEW avec un numéro de téléphone, c'est le composeur de numéros qui se lance.
+    - **ACTION_DIAL** :  pour ouvrir le composeur de numéros téléphoniques
+    - **ACTION_DELETE*** : Un URI vers les données à supprimer
+    - **ACTION_EDIT*** : Ouvrir un éditeur adapté pour modifier les données fournies. Un URI vers les données à éditer
+    - **ACTION_INSERT*** :  insérer des données
+    - **ACTION_PICK*** : Séléctionner un élément dans un ensemble de données
+    - **ACTION_SEARCH** : Effectuer une recherche
+    - **ACTION_SENDTO** : ENvoyer un message à quelqu'un
+    - **ACTION_WEB_SEARCH** : Effectuer une recherche sur internet
 
 ```java
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -75,11 +87,71 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             finish();
         }
         if(v == btnSiteExterieur) {
+            // ACTION_VIEW :  si on veut voir quelque chose. ACTION_DIAL pour ouvrir le composeur de numéros téléphoniques
             Intent url = new Intent(Intent.ACTION_VIEW);
-            url.setData(Uri.parse("https://www.thielens-marie.be"));
-            startActivity(url);
+            // un objet Uri est une chaine de caractère qui permet d'identifier un endroit
+            url.setData(Uri.parse("https://www.thielens-marie.be")); // setData pour envoyer les données. Uri.parse() crée un nouvel Uri objet à partir d'un string
+            startActivity(url); // demarer l'activité avec en paramètre l'intent
         }
     }
-
-
 ```
+Mettre l'action dans le manifest
+
+```xml
+<activity android:name=".MainActivity">
+    <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <action android:name="android.intent.action.VIEW"/>
+        <category android:name="android.intent.category.LAUNCHER" />
+    </intent-filter>
+</activity>
+```
+
+### Exemple pour passer un coup de fil
+
+```java
+monBtn.setOnClickListener(new View.OnClickListener() {
+  @Override
+  public void onClick(View v) {
+    Uri numTel = Uri.parse("tel:0606060606");
+    Intent telIntent = new Intent(Intent.ACTION_DIAL, telIntent);
+    startActivity(telIntent);
+  }
+});
+```
+## Faire passer les infos entre les activités ( le nom et prénom de l'utilisateur)
+Je vais changer le vouton qui me servait à aller sur un site web par un contenu pour pouvoir transmettre le nom et prenom
+
+### Modification du fichier MainActivity
+- getIntent();
+- putExtra()
+- getExtras()
+- hasExtra
+
+```java
+if(v == btnSiteExterieur) {
+    Intent saluer = new Intent(getApplicationContext(), ListePersonneActivity.class);
+    // putExtra va envoyé les données à l'activité enfant. 
+    saluer.putExtra("prenom", "Marie"); // ("clé", "valeur")
+    saluer.putExtra("nom", "Thielens");
+    startActivity(saluer);
+}
+```
+
+### Modification du layout et du fichier strings.xml
+
+- La balise de texte qui contiendra le bonjour avec le nom de l'utilisateur
+
+```xml
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/texte_personne_saluer"
+        android:text="@string/bonjour_s"/>
+```
+
+- Ma string de mise en forme
+`<string name="bonjour_s">Bonjour %s</string>`
+
+## Le fichier qui reçoit 
+
