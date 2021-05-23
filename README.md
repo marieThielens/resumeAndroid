@@ -4,6 +4,9 @@
 
 ### Manifests
 Contient un seul fichier *AndroidManifest.xml* . C'est la carte d'identité de notre application. C'est là que je vais rajouter mes droits (ex pour passer un coup de fil)
+- `android:label="Mon application"` => Le nom de mon application. Visible dans la barre du haut
+- `android:roundIcon="@mipmap/ic_launcher_round"` => L'icone de mon application. L'icone que l'utilisateur vera sur son gsm. Par exemple le play de google store
+- `andoird:supportsRtl="true"` fait référence au support de langue arabe ou hébreux ( sens de lecture inversé)
 
 ### **Dossier src**
 

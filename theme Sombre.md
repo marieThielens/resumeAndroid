@@ -1,1 +1,96 @@
-# Créer un style, un thème sombre
+# Créer un style propre, un thème sombre
+
+## Référencez toutes les couleurs dans colors.xml
+
+Pour commencer il faut créer un dossier styles dans le dossier values. Clique droit sur values / new. Donner le nom style au fichier et styles au dossier
+
+On aura 4 fichiers :
+- Un fichier qui regroupe les différentes tailles. On va l'appeler dimension
+- un fichier style général
+- un fichier style pour le mode jour
+- un fichier style pour le mode sombre
+
+- new ressource files / nom : style qualifiers : 
+
+### Créer notre fichier pour les dimensions
+
+- new Values Ressource File / dim
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="tailleTitre">50sp</dimen>
+</resources>
+```
+
+- Utiliser ce tyle dans notre layout
+
+### Créer un fichier styleGeneral.xml 
+Ce fichier represente le style global de l'application. On peut voir que j'utilise ma dimension sur le 2eme item
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="titreDemo">
+        <item name="android:textStyle">italic|bold</item>
+        <item name="android:textSize">@dimen/tailleTitre</item> 
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:paddingEnd">10dp</item>
+        <item name="android:fontFamily">casual</item>
+    </style>
+</resources>
+```
+
+### Appliquer votre style dans votre layout ( activity_main.xml )
+
+```java
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="Vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/title_exo1"
+                style="@style/titreDemo"
+                />
+</LinearLayout>
+```
+### Rajouter des couleurs en prévision de mon thème clair/ sombre dans colors.xml
+
+```xml
+    <color name="bleu">#2C2C91</color>
+    <color name="jaune">#FFF1E159</color>
+```
+
+### Faire mon fichier pour le theme clair
+
+clique droit sur value/ new value file / nom : styleClair . Availible qualifers : Night Mode = Not Night
+-  **name ="nomDuParent.nomAChoisir"** 
+- **parent="titreDemo"** le nom du theme parent
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="titreDemo.titre_clair." parent="titreDemo">
+        <item name="android:textColor">@color/bleu</item>
+    </style>
+</resources>
+```
+
+
+### Faire mon fichier pour le thème sombre
+
+clique droit sur value/ new value file / nom : styleSombre . Availible qualifers : Night Mode = Night
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="titreDemo.titre_sombre." parent="titreDemo">
+        <item name="android:textColor">@color/jaune</item>
+    </style>
+</resources>
+```
