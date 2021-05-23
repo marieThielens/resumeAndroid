@@ -1,10 +1,6 @@
 #Les intents
 
 - transmission de données entre les activités
-- 3 types de données saisies dans les intents
-    - Activity/action
-    - data
-    - extras
 
 ## Intent sur un bouton pour aller d'une page à l'autre ( sans transmettre d'info)
 
@@ -120,38 +116,115 @@ monBtn.setOnClickListener(new View.OnClickListener() {
 });
 ```
 ## Faire passer les infos entre les activités ( le nom et prénom de l'utilisateur)
-Je vais changer le vouton qui me servait à aller sur un site web par un contenu pour pouvoir transmettre le nom et prenom
-
-### Modification du fichier MainActivity
-- getIntent();
-- putExtra()
-- getExtras()
-- hasExtra
-
-```java
-if(v == btnSiteExterieur) {
-    Intent saluer = new Intent(getApplicationContext(), ListePersonneActivity.class);
-    // putExtra va envoyé les données à l'activité enfant. 
-    saluer.putExtra("prenom", "Marie"); // ("clé", "valeur")
-    saluer.putExtra("nom", "Thielens");
-    startActivity(saluer);
-}
-```
+Je vais changer le bouton qui me servait à aller sur un site web par un contenu pour pouvoir transmettre le nom et prenom. J'aurai aussi besoin d'un textEdit en plus pour transmettre le nom
 
 ### Modification du layout et du fichier strings.xml
 
-- La balise de texte qui contiendra le bonjour avec le nom de l'utilisateur
+- Je vais changer le bouton qui me servait à aller sur un site web par un contenu pour pouvoir transmettre le nom. J'aurai aussi besoin d'un textEdit en plus pour transmettre le nom
 
 ```xml
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/texte_personne_saluer"
-        android:text="@string/bonjour_s"/>
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Votre nom : "
+                android:id="@+id/inputNom"
+                />
+            <Button
+                android:id="@+id/btn_entrer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Clique moi"
+                />
+            <Button
+                android:id="@+id/btn_externe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Me connecter"
+                />
+        </LinearLayout>
+</RelativeLayout>
 ```
-
-- Ma string de mise en forme
+- Ma string de mise en forme ( voir fichier string.xml)
 `<string name="bonjour_s">Bonjour %s</string>`
 
-## Le fichier qui reçoit 
+### Modification du fichier MainActivity
+- Créer mon intent. Modification du nom du bouton. Liaison du textEdit
 
+- putExtra() : Méthode pour envoyer mes données d'une activité à l'autre
+
+```java
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+
+    private Button btnEntrer, btnSaluer;
+    private EditText nom;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Lier ma vue(le layout) à mon activité
+        nom = findViewById(R.id.inputNom);
+        btnEntrer = findViewById(R.id.btn_entrer);
+        btnSaluer = findViewById(R.id.btn_externe);
+        // Ecouter mes boutons
+        btnEntrer.setOnClickListener(this);
+        btnSaluer.setOnClickListener(this);
+    }
+    @Override
+    public void onClick(View v) {
+        if(v == btnEntrer) {
+            Intent intent = new Intent(getApplicationContext(), ListePersonneActivity.class);
+            startActivity(intent); // demarrer l'activité
+            finish();
+        }
+        if(v == btnSaluer) {
+            // Creation d'un intent pour ouvrir l'activité ListePersonne.java
+            Intent saluerIntent = new Intent(getApplicationContext(), ListePersonneActivity.class);
+            // Méthode pour envoyer mes données d'une activité à l'autre
+            saluerIntent.putExtra("nom", nom.getText().toString());
+            startActivity(saluerIntent);
+            finish();
+        }
+```
+## Le fichier qui va recevoir les datas ( le nom de l'utilisateur )
+
+
+```java
+public class ListePersonneActivity extends AppCompatActivity {
+
+    public TextView saluerT;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_liste_personne);
+
+        // Liaison avec le layout
+        saluerT = findViewById(R.id.texte_personne_saluer);
+
+        // Intent
+        // C'est l'objet Bundle qui peut véhiculer nos données s'une activité à l'autre
+        Bundle extra = this.getIntent().getExtras();
+        String nomI = extra.getString("nom");
+        // Affichage du message
+        String message = String.format(getString(R.string.bonjour_s), nomI);
+        saluerT.setText(message);
+    }
+}
+```
+
+- La suite :
+- [Jouer avec le style](https://github.com/marieThielens/resumeAndroid/blob/master/Creer%20notre%20propre%20style_theme%20Sombre_orientation)md

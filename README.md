@@ -25,6 +25,10 @@ Contient toutes les ressources de l'application
         `Toast.makeText(getApplicationContext(), "Bonjour", Toast.LENGTH_LONG).show();`
 - **Ajuster le clavier** :pour que quand le clavier s'ouvre le texte remonte. Dans le **Manifest** rajouter cette ligne `android:windowsSoftInputMode="ajustResize"`
 
+`btnConnect.setOnClickListener(v -> { `
+est l'équivalent d'écrire
+`btnConnect.setOnClickListener(new View.OnClickListener() {`
+
 #### Layout exemple
 
 Type de layout : 
@@ -135,5 +139,6 @@ public class MainActivity extends AppCompatActivity{
 - La suite :
 - [Jouer avec le style](https://github.com/marieThielens/resumeAndroid/blob/master/Creer%20notre%20propre%20style_theme%20Sombre_orientation)md
 - [intents / Passer un coup de fil / passer des données entre les activités](https://github.com/marieThielens/resumeAndroid/blob/master/intents.md)
+-
 
 / Liste et recycler view
