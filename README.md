@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     // Lier, récupérer mes éléments( visuel) à l'aide de l'id. R (ressource) c'est une classe. La classe de l'id
     btnLogin = findViewById(R.id.btn_login_connect);
-    btnCancel = findViewById(R.id.btn_Cancel_connect);
+    btnCancel = findViewById(R.id.btn_cancel_connect);
     
     // Ecouter mes boutons
     btnLogin.setOnClickListener(this); 
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(getApplicationContext(), "Vous allez être redirigé", Toast.LENGTH_LONG).show();
             break;
 
-            case R.id.btn_Cancel_connect:
+            case R.id.btn_cancel_connect:
             Toast.makeText(getApplicationContext(), "Au revoir", Toast.LENGTH_LONG).show();
             break;
         }
@@ -111,4 +111,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 - Les utiliser dans notre layout
 `android:textColor=@color/jaune`
 
-- A faire creer notre propre style / intents / Passer un coup de fil / Liste et recycler view
+- La suite :µ
+ creer notre propre style / intents / Passer un coup de fil / Liste et recycler view
