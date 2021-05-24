@@ -1,5 +1,7 @@
 # Memento Android Studio
 
+- Lancer l'émulateur dans android : File > Settings > Tools > Emulator
+
 ## Les différents dossiers / fichiers
 
 ### Manifests
