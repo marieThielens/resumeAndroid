@@ -1,6 +1,10 @@
 # Memento Android Studio
 
 - Lancer l'émulateur dans android : File > Settings > Tools > Emulator
+- `getString()` : 
+- `putString()`
+- `toString()`
+- `setText()`
 
 ## Les différents dossiers / fichiers
 
