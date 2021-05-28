@@ -146,5 +146,3 @@ public class MainActivity extends AppCompatActivity{
 - [Jouer avec le style](https://github.com/marieThielens/resumeAndroid/blob/master/Creer%20notre%20propre%20style_theme%20Sombre_orientation)md
 - [intents / Passer un coup de fil / passer des données entre les activités](https://github.com/marieThielens/resumeAndroid/blob/master/intents.md)
 -
-
-/ Liste et recycler view
