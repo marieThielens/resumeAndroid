@@ -18,6 +18,15 @@ Contient un seul fichier *AndroidManifest.xml* . C'est la carte d'identité de n
 
 - **MainActivity.java** : l'activitée principale de mon application. Une activité va contenir l'ensemble des éléments graphyques du type champ texte, bouton ..
 
+quand on est dans une activité :
+
+**onCreate**, on instancie les objets ;
+**onStart**, on lance les traitements ;
+**onResume**, on s'abonne et on remet le contexte utilisateur ;
+**onPause**, on se désabonne et on enregistre le contexte utilisateur ;
+**onStop** on arrête les traitements et on désalloue les objets ;
+**onDestroy** on ne fait rien (elle n'est pas appelée systématiquement), on préfère utiliser les méthodes de type onTrimMemory pour connaître l'état de l'application dans le LRU cache.
+
 ### **Dossier res**
 Contient toutes les ressources de l'application
 - **drawable** : les images 
