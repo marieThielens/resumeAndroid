@@ -1,10 +1,10 @@
 # Memento Android Studio
 
+**gradle** : générer des fichier apk en gérant les dépendances. Ce qui lance l'application
+**bundle** : quand on fait un onCreate() on instancie la classer bundle. Conteneur pour les données transmissibles d'une classe à l'autre
+
 - Lancer l'émulateur dans android : File > Settings > Tools > Emulator
-- `getString()` : 
-- `putString()`
-- `toString()`
-- `setText()`
+
 
 ## Les différents dossiers / fichiers
 
